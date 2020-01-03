@@ -5,11 +5,17 @@ services:
     build:
       context: .
     ports:
-      - "8000:8000"
+      - "8000-8003:8000"
     volumes:
       - ./app:/app
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+      
+  grafana:
+    image: grafana/grafana:5.1.0
+    ports:
+      - 3000:3000
+    user: "104"
     
 
-
+  
