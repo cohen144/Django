@@ -4,8 +4,8 @@ services:
   app:
     build:
       context: .
-    ports:
-      - "8000-8003:8000"
+    expose:
+      - "8000"
     volumes:
       - ./app:/app
     command: >
@@ -14,8 +14,13 @@ services:
   grafana:
     image: grafana/grafana:5.1.0
     ports:
-      - 3000:3000
+     - 3000:3000
     user: "104"
-    
 
-  
+  nginx: 
+    image: nginx:latest
+    container_name: load-Balancer
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
